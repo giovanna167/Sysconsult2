@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sysconsult | Gestão Médica Inteligente</title>
+<style>
+:root {
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #e2e5ea 50%, #c8ced6 100%);
+  --text-primary: #2c2e33;
+  --text-muted: #5e646e;
+  --text-light: #88909c;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --border-card: rgba(255, 255, 255, 0.9);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 8%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border-card);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: var(--text-primary);
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1.5rem 2rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  margin-bottom: 1.2rem;
+  color: var(--text-primary);
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.btn-primary {
+  background: var(--text-primary);
+  color: #ffffff;
+  padding: 0.9rem 2.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  background: #111315;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-preview {
+  max-width: 1000px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 1rem;
+}
+
+.dashboard-preview img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dashboard-preview img:hover {
+  transform: scale(1.01);
+  box-shadow: var(--shadow-hover);
+}
+
+.target-audience {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border-card);
+  border-bottom: 1px solid var(--border-card);
+  padding: 3.5rem 8%;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.target-audience h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.specialties-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.specialty-tag {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  padding: 0.8rem 1.6rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+}
+
+.specialty-tag:hover {
+  transform: scale(1.05);
+  background: #ffffff;
+  box-shadow: var(--shadow-hover);
+}
+
+.features-section {
+  max-width: 1100px;
+  margin: 0 auto 5rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-hover);
+}
+
+.feature-card h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.showcase-container {
+  max-width: 1100px;
+  margin: 0 auto 5rem auto;
+  padding: 0 5%;
+}
+
+.showcase-item {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.showcase-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.showcase-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.showcase-text span {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.showcase-text h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0.5rem 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.showcase-text p {
+  color: var(--text-muted);
+}
+
+.showcase-img-box {
+  flex: 1;
+  min-width: 300px;
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.showcase-img-box:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.showcase-img-box img {
+  width: 100%;
+  display: block;
+}
+
+.pricing-section {
+  padding: 4rem 2%;
+  max-width: 1280px;
+  margin: 0 auto 5rem auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 992px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.price-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 2rem 1.2rem;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.price-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-hover);
+}
+
+.price-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.price-card .subtitle {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.price-amount {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.2rem;
+}
+
+.price-amount small {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.price-card ul {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.price-card ul li {
+  margin-bottom: 0.5rem;
+}
+
+.cta-banner {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.cta-banner h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.cta-banner p {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+#auth-screen {
+  display: none;
+  min-height: 80vh;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.auth-toggle {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e4e7ec;
+}
+
+.auth-toggle button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.auth-toggle button.active {
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--text-primary);
+}
+
+.form-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #101828;
+  margin: 1.5rem 0 1rem 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 576px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #344054;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 8px;
+  border: 1.5px solid #cccccc;
+  background: #ffffff;
+  color: #101828;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #98a2b3;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2c2e33;
+  box-shadow: 0 0 0 3px rgba(44, 46, 51, 0.15);
+  background: #ffffff;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border-card);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo" onclick="showMainPage()">SYSCONSULT</a>
+  <nav id="main-nav">
+    <a href="javascript:void(0)" onclick="navigateToSection('recursos')">Recursos</a>
+    <a href="javascript:void(0)" onclick="navigateToSection('funcionalidades')">O Sistema</a>
+    <a href="javascript:void(0)" onclick="navigateToSection('planos')">Planos</a>
+    <a href="javascript:void(0)" onclick="showAuthPage('register')">Cadastrar</a>
+  </nav>
+</header>
+
+<div id="main-content">
+  <section class="hero">
+    <h1 id="typing-title"></h1>
+    <p>Agendamentos, histórico de atendimento e finanças centralizados em uma única plataforma intuitiva.</p>
+    <button onclick="scrollToSystem()" class="btn-primary">Conhecer o Sistema</button>
+  </section>
+
+  <div class="dashboard-preview">
+    <img src="img/Captura de tela 2026-08-31 142036.png" alt="Dashboard Sysconsult" class="zoomable">
+  </div>
+
+  <section class="target-audience">
+    <h2>Desenvolvido para profissionais e clínicas da saúde</h2>
+    <div class="specialties-grid">
+      <div class="specialty-tag">Consultórios Médicos</div>
+      <div class="specialty-tag">Psicologia & Terapia</div>
+      <div class="specialty-tag">Fisioterapia & Pilates</div>
+      <div class="specialty-tag">Nutrição</div>
+      <div class="specialty-tag">Odontologia</div>
+      <div class="specialty-tag">Fonoaudiologia</div>
+      <div class="specialty-tag">Clínicas Multidisciplinares</div>
+    </div>
+  </section>
+
+  <section id="recursos" class="features-section">
+    <h2 class="section-title">O que o sistema oferece</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>Agendamento Inteligente</h4>
+        <p>Organize grades de horários flexíveis, intervalos recorrentes e bloqueios pontuais sem conflito de agenda.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Prontuário & Histórico</h4>
+        <p>Centralize fichas de pacientes, históricos de consultas e registros em uma interface segura e acessível.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Segurança & LGPD</h4>
+        <p>Seus dados e de seus pacientes armazenados com criptografia e conformidade às diretrizes da LGPD.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Acesso Multiplataforma</h4>
+        <p>Acesse pelo computador, tablet ou celular em qualquer lugar, sem necessidade de instalações complexas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="funcionalidades">
+    <h2 class="section-title">Conheça o Sysconsult por dentro</h2>
+    <div class="showcase-container">
+      <div class="showcase-item">
+        <div class="showcase-text">
+          <span>FINANCEIRO & OPERACIONAL</span>
+          <h3>Controle completo de atendimentos e cobranças</h3>
+          <p>Visualize o total recebido no período, valores pendentes e atendimentos sem cobrança registrada. Mantenha o fluxo financeiro sob controle.</p>
+        </div>
+        <div class="showcase-img-box">
+          <img src="img/Captura de tela 2026-08-31 142102.png" alt="Meus Atendimentos" class="zoomable">
+        </div>
+      </div>
+      <div class="showcase-item reverse">
+        <div class="showcase-text">
+          <span>AGENDA & DISPONIBILIDADE</span>
+          <h3>Sua semana organizada com precisão</h3>
+          <p>Configure horários recorrentes de atendimento, pausas programadas e acompanhe sua carga semanal estimada em poucas etapas.</p>
+        </div>
+        <div class="showcase-img-box">
+          <img src="img/Captura de tela 2026-08-31 142131.png" alt="Meus Horários" class="zoomable">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos" class="pricing-section">
+    <h2 class="section-title">Planos feitos para o seu momento</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div>
+          <h3>Iniciante</h3>
+          <p class="subtitle">Para testar e começar</p>
+          <div class="price-amount">R$ <span class="counter" data-target="0">0</span><small>/mês</small></div>
+          <ul>
+            <li>✔ 1 Profissional</li>
+            <li>✔ Até 5 pacientes/mês</li>
+            <li>✔ Agenda Básica</li>
+          </ul>
+        </div>
+        <button onclick="showAuthPage('register', 'Iniciante')" class="btn-primary" style="width: 100%;">Começar Grátis</button>
+      </div>
+
+      <div class="price-card">
+        <div>
+          <h3>Solo</h3>
+          <p class="subtitle">Para consultório autônomo</p>
+          <div class="price-amount">R$ <span class="counter" data-target="119">0</span><small>/mês</small></div>
+          <ul>
+            <li>✔ 1 Profissional</li>
+            <li>✔ Pacientes Ilimitados</li>
+            <li>✔ Financeiro Completo</li>
+          </ul>
+        </div>
+        <button onclick="showAuthPage('register', 'Solo')" class="btn-primary" style="width: 100%;">Escolher Solo</button>
+      </div>
+
+      <div class="price-card">
+        <div>
+          <h3>Clínica</h3>
+          <p class="subtitle">Para equipes até 5 profissionais</p>
+          <div class="price-amount">R$ <span class="counter" data-target="239">0</span><small>/mês</small></div>
+          <ul>
+            <li>✔ Até 5 Profissionais</li>
+            <li>✔ Pacientes Ilimitados</li>
+            <li>✔ Secretárias Grátis</li>
+          </ul>
+        </div>
+        <button onclick="showAuthPage('register', 'Clínica')" class="btn-primary" style="width: 100%;">Escolher Clínica</button>
+      </div>
+
+      <div class="price-card">
+        <div>
+          <h3>Clínica Pro</h3>
+          <p class="subtitle">Para grandes clínicas</p>
+          <div class="price-amount">R$ <span class="counter" data-target="389">0</span><small>/mês</small></div>
+          <ul>
+            <li>✔ Até 15 Profissionais</li>
+            <li>✔ Suporte Prioritário</li>
+            <li>✔ Relatórios Avançados</li>
+          </ul>
+        </div>
+        <button onclick="showAuthPage('register', 'Clínica Pro')" class="btn-primary" style="width: 100%;">Escolher Pro</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Se junte conosco!</h2>
+    <p>A Sysconsult foi pensada para simplificar a gestão da sua clínica.</p>
+    <button onclick="showAuthPage('register')" class="btn-primary">Teste agora</button>
+  </section>
+</div>
+
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-toggle">
+      <button id="tab-register" class="active" type="button" onclick="switchAuthMode('register')">Criar Conta</button>
+      <button id="tab-login" type="button" onclick="switchAuthMode('login')">Entrar</button>
+    </div>
+
+    <form id="auth-form">
+      <!-- Dados do Usuário -->
+      <div class="form-section-title" id="section-user-title">Dados do Usuário</div>
+
+      <div class="form-group" id="group-nome">
+        <label for="userName">Nome Completo *</label>
+        <input type="text" id="userName" placeholder="Digite seu nome">
+      </div>
+
+      <div class="form-grid-2" id="group-user-contact">
+        <div class="form-group">
+          <label for="userEmail">E-mail Profissional *</label>
+          <input type="email" id="userEmail" required placeholder="seu@email.com">
+        </div>
+        <div class="form-group" id="group-telefone">
+          <label for="userPhone">Telefone / WhatsApp *</label>
+          <input type="tel" id="userPhone" placeholder="(00) 00000-0000">
+        </div>
+      </div>
+
+      <div class="form-grid-2" id="group-passwords">
+        <div class="form-group">
+          <label for="userPassword">Senha *</label>
+          <input type="password" id="userPassword" required placeholder="••••••••">
+        </div>
+        <div class="form-group" id="group-confirmar-senha">
+          <label for="userConfirmPassword">Confirmar Senha *</label>
+          <input type="password" id="userConfirmPassword" placeholder="••••••••">
+        </div>
+      </div>
+
+      <!-- Dados da Clínica -->
+      <div class="clinic-fields" id="group-clinic-fields">
+        <div class="form-section-title">Dados da Clínica</div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="clinicName">Nome da Clínica *</label>
+            <input type="text" id="clinicName" placeholder="Nome da clínica/consultório">
+          </div>
+          <div class="form-group">
+            <label for="clinicCnpj">CNPJ *</label>
+            <input type="text" id="clinicCnpj" placeholder="00.000.000/0000-00">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="clinicEmail">E-mail da Clínica *</label>
+            <input type="email" id="clinicEmail" placeholder="clinica@email.com">
+          </div>
+          <div class="form-group">
+            <label for="clinicPhone">Telefone da Clínica *</label>
+            <input type="tel" id="clinicPhone" placeholder="(00) 0000-0000">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="clinicZipCode">CEP *</label>
+            <input type="text" id="clinicZipCode" placeholder="00000-000">
+          </div>
+          <div class="form-group">
+            <label for="clinicStreet">Rua / Endereço *</label>
+            <input type="text" id="clinicStreet" placeholder="Rua / Avenida">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="clinicNumber">Número *</label>
+            <input type="text" id="clinicNumber" placeholder="123">
+          </div>
+          <div class="form-group">
+            <label for="clinicComplement">Complemento</label>
+            <input type="text" id="clinicComplement" placeholder="Sala 4, Bloco B (Opcional)">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="clinicNeighborhood">Bairro *</label>
+            <input type="text" id="clinicNeighborhood" placeholder="Bairro">
+          </div>
+          <div class="form-group">
+            <label for="clinicCity">Cidade *</label>
+            <input type="text" id="clinicCity" placeholder="Cidade">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="clinicState">Estado *</label>
+          <select id="clinicState">
+            <option value="">Selecione o Estado</option>
+            <option value="SP">São Paulo (SP)</option>
+            <option value="RJ">Rio de Janeiro (RJ)</option>
+            <option value="MG">Minas Gerais (MG)</option>
+            <option value="ES">Espírito Santo (ES)</option>
+            <option value="PR">Paraná (PR)</option>
+            <option value="SC">Santa Catarina (SC)</option>
+            <option value="RS">Rio Grande do Sul (RS)</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" id="btn-submit" style="width: 100%; margin-top: 1.5rem;">Finalizar Cadastro</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 1.5rem;">
+      <a href="javascript:void(0)" onclick="showMainPage()" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">← Voltar para o site</a>
+    </p>
+  </div>
+</div>
+
+<div class="modal" id="imageModal">
+  <img id="modalImg" src="" alt="Zoom">
+</div>
+
+<footer>
+  <p>&copy; 2026 Sysconsult. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+let currentAuthMode = 'register';
+const textToType = "Gestão clínica moderna e sem complicações";
+const typingTitle = document.getElementById("typing-title");
+let charIndex = 0;
+
+function typeEffect() {
+  if (charIndex < textToType.length) {
+    typingTitle.textContent += textToType.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeEffect, 50);
+  }
+}
+window.addEventListener("DOMContentLoaded", typeEffect);
+
+function scrollToSystem() {
+  document.getElementById('funcionalidades').scrollIntoView({ behavior: 'smooth' });
+}
+
+function navigateToSection(sectionId) {
+  showMainPage();
+  setTimeout(() => {
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 50);
+}
+
+function showAuthPage(mode, selectedPlan = null) {
+  document.getElementById("main-content").style.display = "none";
+  document.getElementById("auth-screen").style.display = "flex";
+  window.scrollTo(0, 0);
+  switchAuthMode(mode);
+}
+
+function showMainPage() {
+  document.getElementById("auth-screen").style.display = "none";
+  document.getElementById("main-content").style.display = "block";
+}
+
+function switchAuthMode(mode) {
+  currentAuthMode = mode;
+  const isRegister = mode === 'register';
+
+  document.getElementById('tab-register').className = isRegister ? 'active' : '';
+  document.getElementById('tab-login').className = !isRegister ? 'active' : '';
+
+  document.getElementById('section-user-title').innerText = isRegister ? 'Dados do Usuário' : 'Acesse sua Conta';
+  document.getElementById('group-nome').style.display = isRegister ? 'block' : 'none';
+  document.getElementById('group-telefone').style.display = isRegister ? 'block' : 'none';
+  document.getElementById('group-confirmar-senha').style.display = isRegister ? 'block' : 'none';
+  document.getElementById('group-clinic-fields').style.display = isRegister ? 'block' : 'none';
+
+  document.getElementById('userName').required = isRegister;
+  document.getElementById('userPhone').required = isRegister;
+  document.getElementById('userConfirmPassword').required = isRegister;
+
+  const clinicInputs = document.querySelectorAll('#group-clinic-fields input:not(#clinicComplement), #clinicState');
+  clinicInputs.forEach(input => {
+    input.required = isRegister;
+  });
+
+  document.getElementById('btn-submit').innerText = isRegister ? 'Finalizar Cadastro' : 'Acessar Conta';
+}
+
+const authForm = document.getElementById('auth-form');
+authForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const btnSubmit = document.getElementById('btn-submit');
+  btnSubmit.disabled = true;
+
+  // === MODO LOGIN ===
+  if (currentAuthMode === 'login') {
+    const userEmail = document.getElementById('userEmail').value;
+    const userPassword = document.getElementById('userPassword').value;
+
+    btnSubmit.innerText = 'Autenticando...';
+
+    try {
+      const response = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer G7k2P9x4M1q8R5zC'
+        },
+        body: JSON.stringify({ email: userEmail, password: userPassword })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        alert(`Bem-vindo(a) de volta, ${data.user.Username || 'Usuário'}!\nClínica: ${data.clinic.Name}`);
+        authForm.reset();
+        showMainPage();
+      } else {
+        alert('Erro ao entrar: ' + (data.error || 'E-mail não encontrado na base de dados.'));
+      }
+    } catch (error) {
+      console.error('Erro no login:', error);
+      alert('Erro de conexão com o servidor proxy: ' + error.message);
+    } finally {
+      btnSubmit.innerText = 'Acessar Conta';
+      btnSubmit.disabled = false;
+    }
+    return;
+  }
+
+  // === MODO CADASTRO ===
+  const userPassword = document.getElementById('userPassword').value;
+  const userConfirmPassword = document.getElementById('userConfirmPassword').value;
+
+  if (userPassword !== userConfirmPassword) {
+    alert('As senhas digitadas não coincidem!');
+    document.getElementById('userConfirmPassword').focus();
+    btnSubmit.disabled = false;
+    return;
+  }
+
+  btnSubmit.innerText = 'Enviando...';
+
+  const payload = {
+    Clinic: {
+      Name: document.getElementById('clinicName').value,
+      Email: document.getElementById('clinicEmail').value,
+      Phone: document.getElementById('clinicPhone').value,
+      Cnpj: document.getElementById('clinicCnpj').value,
+      ZipCode: document.getElementById('clinicZipCode').value,
+      Street: document.getElementById('clinicStreet').value,
+      AddressNumber: document.getElementById('clinicNumber').value,
+      AddressComplement: document.getElementById('clinicComplement').value || '',
+      Neighborhood: document.getElementById('clinicNeighborhood').value,
+      City: document.getElementById('clinicCity').value,
+      State: document.getElementById('clinicState').value
+    },
+    User: {
+      Name: document.getElementById('userName').value,
+      Phone: document.getElementById('userPhone').value,
+      Email: document.getElementById('userEmail').value,
+      Password: userPassword,
+      ConfirmPassword: userConfirmPassword
+    }
+  };
+
+  try {
+    const response = await fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer G7k2P9x4M1q8R5zC'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const responseText = await response.text();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      data = { message: responseText };
+    }
+
+    if (response.ok && (data.success || data.Success)) {
+      alert('Clínica e usuário master cadastrados com sucesso!');
+      authForm.reset();
+      showMainPage();
+    } else {
+      alert('Erro no cadastro: ' + (data.error || data.message || 'Verifique os dados informados.'));
+    }
+  } catch (error) {
+    console.error('Detalhes do erro:', error);
+    alert('Erro de conexão ao enviar os dados para a API: ' + error.message);
+  } finally {
+    btnSubmit.innerText = 'Finalizar Cadastro';
+    btnSubmit.disabled = false;
+  }
+});
+
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImg');
+document.querySelectorAll('.zoomable').forEach(img => {
+  img.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    modalImg.src = img.src;
+  });
+});
+modal.addEventListener('click', () => modal.style.display = 'none');
+
+const counters = document.querySelectorAll('.counter');
+let animated = false;
+
+const startCounters = () => {
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    if (target === 0) return;
+    let count = 0;
+    const speed = target / 40;
+    const updateCount = () => {
+      count += speed;
+      if (count < target) {
+        counter.innerText = Math.ceil(count);
+        setTimeout(updateCount, 30);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+};
+
+window.addEventListener('scroll', () => {
+  const pricingSection = document.getElementById('planos');
+  if (!pricingSection) return;
+  const sectionPos = pricingSection.getBoundingClientRect().top;
+  if (sectionPos < window.innerHeight / 1.2 && !animated) {
+    startCounters();
+    animated = true;
+  }
+});
+</script>
+</body>
+</html>
